@@ -106,6 +106,7 @@ FROM
     orders
 GROUP BY hour;
     ```
+    
     - **Result:** Number of orders placed each hour.
 
 8. **Category-wise Distribution of Pizzas**
@@ -117,10 +118,12 @@ FROM
 GROUP BY category
 ORDER BY quantity DESC; 
     ```
+    
     - **Result:** Number of orders for each pizza category.
 
 9. **Average Number of Pizzas Ordered Per Day**
-    ```
+
+```
 SELECT 
     ROUND(AVG(quantity), 0) AS avg_pizza_order_per_day
 FROM
