@@ -24,98 +24,80 @@ The purpose of this project is to analyze pizza sales data to derive meaningful 
 2. **Total Revenue Generated from Pizza Sales**
     ```
     SELECT 
-    ROUND(SUM(order_details.quantity * pizzas.price),
-            2) AS total_sale
+    ROUND(SUM(order_details.quantity * pizzas.price),2) AS total_sale
     FROM
     order_details
-        JOIN
-    pizzas ON pizzas.pizza_id = order_details.pizza_id;
+    JOIN pizzas ON pizzas.pizza_id = order_details.pizza_id;
     ```
     
 - **Result:** Total revenue generated- 817860.05.
 
 3. **Highest-Priced Pizza**
     ```
-   SELECT 
-    pizza_types.name, pizzas.price AS highest_priced_pizza
-FROM
-    pizza_types
-        JOIN
-    pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
-ORDER BY pizzas.price DESC
-LIMIT 1;
+    SELECT pizza_types.name, pizzas.price AS highest_priced_pizza
+    FROM pizza_types
+    JOIN pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+    ORDER BY pizzas.price DESC
+    LIMIT 1;
     ```
    
 - **Result:** Highest-priced pizza and its price - The Greek Pizaa - 35.95.
 
 4. **Most Common Pizza Size Ordered**
     ```
-   SELECT 
-    pizzas.size,
-    COUNT(order_details.order_details_id) AS order_count
-FROM
-    pizzas
-        JOIN
-    order_details ON pizzas.pizza_id = order_details.pizza_id
-GROUP BY pizzas.size
-ORDER BY order_count DESC;
+    SELECT pizzas.size,COUNT(order_details.order_details_id) AS order_count
+    FROM pizzas
+    JOIN order_details ON pizzas.pizza_id = order_details.pizza_id
+    GROUP BY pizzas.size
+    ORDER BY order_count DESC;
     ```
 
 - **Result:** Most common pizza size ordered = L - 18526.
 
 5. **Top 5 Most Ordered Pizza Types**
     ```
-SELECT 
-    pizza_types.name, SUM(order_details.quantity) AS quantity
-FROM
-    pizza_types
-        JOIN
-    pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
-        JOIN
-    order_details ON order_details.pizza_id = pizzas.pizza_id
-GROUP BY pizza_types.name
-ORDER BY quantity DESC
-LIMIT 5;
+    SELECT pizza_types.name, SUM(order_details.quantity) AS quantity
+    FROM pizza_types
+    JOIN pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+    JOIN order_details ON order_details.pizza_id = pizzas.pizza_id
+    GROUP BY pizza_types.name
+    ORDER BY quantity DESC
+    LIMIT 5;
     ```
 
 - **Result:** List of the top 5 most ordered pizza types and their quantities.
 
 6. **Total Quantity of Each Pizza Category Ordered**
     ```
-SELECT 
-    pizza_types.category,
-    SUM(order_details.quantity) AS quantity
-FROM
-    pizza_types
-        JOIN
-    pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
-        JOIN
-    order_details ON order_details.pizza_id = pizzas.pizza_id
-GROUP BY pizza_types.category
-ORDER BY quantity DESC;
+    SELECT pizza_types.category,SUM(order_details.quantity) AS quantity
+    FROM pizza_types
+    JOIN pizzas ON pizza_types.pizza_type_id = pizzas.pizza_type_id
+    JOIN order_details ON order_details.pizza_id = pizzas.pizza_id
+    GROUP BY pizza_types.category
+    ORDER BY quantity DESC;
     ```
 
 - **Result:** Total quantity ordered for each pizza category.
 
 7. **Distribution of Orders by Hour of the Day**
     ```
-  SELECT 
+    SELECT 
     HOUR(order_time) AS hour, COUNT(order_id) AS order_count
-FROM
+    FROM
     orders
-GROUP BY hour;
+    GROUP BY hour;
     ```
     
 - **Result:** Number of orders placed each hour.
 
 8. **Category-wise Distribution of Pizzas**
     ```
-SELECT 
+   SELECT 
     category, COUNT(pizza_type_id) AS quantity
-FROM
+   FROM
     pizza_types
-GROUP BY category
-ORDER BY quantity DESC; 
+   GROUP BY category
+   ORDER BY quantity DESC; 
     ```
     
  - **Result:** Number of orders for each pizza category.
@@ -132,7 +114,7 @@ FROM
         orders
     JOIN order_details ON orders.order_id = order_details.order_id
     GROUP BY orders.order_date) AS order_quantity;
-    ```
+```
 
 - **Result:** Average number of pizzas ordered per day.
 
@@ -152,13 +134,13 @@ FROM
 GROUP BY pizza_types.name
 ORDER BY revenue DESC
 LIMIT 3;
-    ```
+```
    
 - **Result:** Top 3 most ordered pizza types by revenue.
 
 11. **Percentage Contribution of Each Pizza Type to Total Revenue**
 
-    ```
+```
 select pizza_types.category,
 round(sum(order_details.quantity * pizzas.price) /(SELECT 
     ROUND(SUM(order_details.quantity * pizzas.price),
@@ -172,13 +154,13 @@ on pizza_types.pizza_type_id = pizzas.pizza_type_id
 join order_details
 on order_details.pizza_id = pizzas.pizza_id
 group by pizza_types.category order by revenue_percentage desc;
-    ```
+```
     
 - **Result:** Percentage contribution of each pizza type to total revenue.
 
 12. **Cumulative Revenue Generated Over Time**
 
-    ```
+```
 select order_date,
 round(sum(revenue) over (order by order_date),2) as cum_revenue
 from 
@@ -188,13 +170,13 @@ from order_details join pizzas
 on order_details.pizza_id = pizzas.pizza_id
 join orders on orders.order_id = order_details.order_id
 group by orders.order_date) as sales;
-    ```
+```
     
 - **Result:** Cumulative revenue generated over time.
 
 13. **Top 3 Most Ordered Pizza Types by Revenue for Each Category**
 
-    ```
+```
 select name, revenue
 from
 (select category, name, revenue,
@@ -207,8 +189,8 @@ on pizza_types.pizza_type_id = pizzas.pizza_type_id
 join order_details
 on order_details.pizza_id = pizzas.pizza_id
 group by pizza_types.category,pizza_types.name) as a) as b
-where rn <= 3;
-    ```
+where rn <= 3;  
+```
 
 - **Result:** Top 3 most ordered pizza types by revenue for each category.
 
