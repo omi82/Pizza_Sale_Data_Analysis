@@ -1,9 +1,3 @@
-# Pizza_Sale_Data_Analysis
-
-Sure! Here is a revised README section for your GitHub repository without categorizing the queries as basic, intermediate, or advanced.
-
----
-
 # Pizza Sale Data Analysis
 
 This project involves analyzing pizza sales data using SQL queries to uncover valuable insights. The analysis includes various queries to provide a comprehensive understanding of sales patterns and trends.
