@@ -19,7 +19,7 @@ The purpose of this project is to analyze pizza sales data to derive meaningful 
 FROM
     orders;
     ```
-    - **Result:** Total number of orders placed - 21350.
+- **Result:** Total number of orders placed - 21350.
 
 2. **Total Revenue Generated from Pizza Sales**
     ```
