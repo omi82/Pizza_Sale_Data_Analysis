@@ -16,9 +16,7 @@ The purpose of this project is to analyze pizza sales data to derive meaningful 
     ```
     SELECT 
     COUNT(order_id) AS total_orders
-FROM
-    orders;
-    
+FROM orders;
     ```
 
 - **Result:** Total number of orders placed - 21350.
